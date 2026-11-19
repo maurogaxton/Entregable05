@@ -66,8 +66,8 @@ class Carrito{
         this.importeTotal = importeTotal
     }
     importeCarrito= () => {
-       this.importeTotal = this.changuitoItems.precio*this.cantidad
-       console.log("Precio total del carrito: $" + this.importeTotal)
+    this.importeTotal = this.changuitoItems.precio*this.cantidad
+    console.log("Precio total del carrito: $" + this.importeTotal)
     }
 }
 
