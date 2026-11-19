@@ -1,13 +1,3 @@
-//Simulador de productos en carrito y modulo de pago 
-
-/* function listarCarrito(lista) {
-    console.log("--- Productos en carrito de compras ---")
-    for (const producto of lista) {
-    console.log(`Producto: ${producto}`)
-    }
-    console.log(`Total: ${lista.length} productos`)
-} */
-
 function recargarCuotas(cantidadCuotas){
     let recargo
     if (cantidadCuotas >= 1 && cantidadCuotas <= 3) {
