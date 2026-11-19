@@ -1,12 +1,12 @@
 //Simulador de productos en carrito y modulo de pago 
 
-function listarCarrito(lista) {
+/* function listarCarrito(lista) {
     console.log("--- Productos en carrito de compras ---")
     for (const producto of lista) {
     console.log(`Producto: ${producto}`)
     }
     console.log(`Total: ${lista.length} productos`)
-}
+} */
 
 function recargarCuotas(cantidadCuotas){
     let recargo
@@ -56,26 +56,62 @@ function calculoPagoConTarjeta(empresa, importe){
 
 const calcularCostoTotal = (importe, cuotasRecargo) => importe * cuotasRecargo
 
-const productosEnCarrito = ["Teclado", "Mouse", "Monitor", "Webcam", "Auriculares"]
-productosEnCarrito.push("Parlantes")    
-productosEnCarrito.unshift("Notebook")  
 
-const productoBajaCarrito = productosEnCarrito.pop() 
-console.log(`Se ha eliminado el elemento: ${productoBajaCarrito}`);
-
-const buscadoEnCarrito = prompt("¿Qué producto quiere buscar?")
-if (productosEnCarrito.includes(buscadoEnCarrito)) {
-    const posicion = productosEnCarrito.indexOf(buscadoEnCarrito)
-    console.log(` "${buscadoEnCarrito}" está en stock, en la posición ${posicion}`)
-} else {
-    console.log(` "${buscadoEnCarrito}" no está en stock`)
+class Producto{
+    static id = 0
+    constructor (id, nombre, origen, presentacion, precio){
+        this.id = ++Producto.id,
+        this.nombre = nombre,
+        this.origen = origen,
+        this.presentacion = presentacion,
+        this.precio = precio
+    }
 }
 
-productosEnCarrito.splice(2, 1, "Mouse inalámbrico") 
+class Carrito{
+    constructor ({changuitoItems}, cantidad){
+        this.id = ++Carrito.id,
+        this.changuitoItems = changuitoItems,
+        this.cantidad = cantidad,
+        this.importeTotal = importeTotal
+    }
+    importeCarrito= () => {
+       this.importeTotal = this.changuitoItems.precio*this.cantidad
+       console.log("Precio total del carrito: $" + this.importeTotal)
+    }
+}
 
-console.log("Estos son los productos en su carrito")
-listarCarrito(productosEnCarrito)
+const te1 = new Producto("Té negro La Virginia", "Argentina", "25 saquitos", 1500);
+const te2 = new Producto("Té verde Taragüi", "Argentina", "20 saquitos", 1850);
+const te3 = new Producto("Té Earl Grey Twinings", "Reino Unido", "25 saquitos", 6500);
+const te4 = new Producto("Té rojo Pu-Erh Inti Zen", "China", "15 saquitos", 4200);
+const te5 = new Producto("Té en hebras Chai Saint Gottard", "India", "50 gramos", 3800);
 
+
+
+
+const changuitoItems = []
+const comprarCarrito = () => {
+    let compraProducto = prompt("Ingrese el producto")
+    let cantidadProducto = prompt("Ingrese la cantidad")
+    
+
+
+    const changuito1 = new Carrito(compraProducto, cantidadProducto)
+    changuitoItems.push(changuito1)
+}
+
+const verCarrito = () => {
+    if(changuitoItems.length == 0) {
+        alert("No hay productos agregados al carrito")
+    } else {
+        console.log(changuitoItems)
+    }
+}
+
+
+
+const pagarCarrito = () => {
 let pagar = true
 while(pagar) {
     let importeValido = false
@@ -89,9 +125,9 @@ while(pagar) {
         } 
     } while (importeValido == false)
 
-    let menu = parseInt(prompt("Ingrese una opcion de pago: 1 VISA, 2 MASTERCARD, 3 AMERICAN EXPRESS, 4 MERCADOPAGO o 5 EFECTIVO"))
+    let menuPago = parseInt(prompt("Ingrese una opcion de pago: 1 VISA, 2 MASTERCARD, 3 AMERICAN EXPRESS, 4 MERCADOPAGO o 5 EFECTIVO"))
     
-    switch(menu) {
+    switch(menuPago) {
         case 1:
             console.log(calculoPagoConTarjeta("Visa", importe))
             break
@@ -118,5 +154,28 @@ while(pagar) {
         pagar = false
         alert("Gracias por su compra!")
     }
+}
+
+
+let menuPrincipal = parseInt(prompt("Bienvenido! Ingrese 1 para comprar, 2 para ver carrito, 3 para pagar o 4 para salir"))
+
+while(menuPrincipal !== 4) {
+    switch(menuPrincipal) {
+        case 1:
+            comprarCarrito()
+            break
+        case 2:
+            verCarrito()
+            break
+        case 3:
+            pagarCarrito()
+            break
+        default:
+            alert("Opcion incorrecta")
+    }
+    menuPrincipal = parseInt(prompt("Bienvenido! Ingrese 1 para comprar, 2 para ver carrito, 3 para pagar o 4 para salir"))
+}
+
+
 
 }
