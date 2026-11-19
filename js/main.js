@@ -46,62 +46,49 @@ function calculoPagoConTarjeta(empresa, importe){
 
 const calcularCostoTotal = (importe, cuotasRecargo) => importe * cuotasRecargo
 
-
 class Producto{
     static id = 0
-    constructor (id, nombre, origen, presentacion, precio){
+    constructor (nombre, origen, presentacion, precio){
         this.id = ++Producto.id,
         this.nombre = nombre,
         this.origen = origen,
         this.presentacion = presentacion,
         this.precio = precio
     }
-}
-
-class Carrito{
-    constructor ({changuitoItems}, cantidad){
-        this.id = ++Carrito.id,
-        this.changuitoItems = changuitoItems,
-        this.cantidad = cantidad,
-        this.importeTotal = importeTotal
-    }
-    importeCarrito= () => {
-    this.importeTotal = this.changuitoItems.precio*this.cantidad
-    console.log("Precio total del carrito: $" + this.importeTotal)
-    }
-}
-
-const te1 = new Producto("Té negro La Virginia", "Argentina", "25 saquitos", 1500);
-const te2 = new Producto("Té verde Taragüi", "Argentina", "20 saquitos", 1850);
-const te3 = new Producto("Té Earl Grey Twinings", "Reino Unido", "25 saquitos", 6500);
-const te4 = new Producto("Té rojo Pu-Erh Inti Zen", "China", "15 saquitos", 4200);
-const te5 = new Producto("Té en hebras Chai Saint Gottard", "India", "50 gramos", 3800);
-
-
-
-
-const changuitoItems = []
-const comprarCarrito = () => {
-    let compraProducto = prompt("Ingrese el producto")
-    let cantidadProducto = prompt("Ingrese la cantidad")
+    verProductos = () => {
+    console.log("Producto: " + this.nombre)
+    console.log("Origen:  " + this.origen)
+    console.log("Presentacion: " + this.presentacion)
+    console.log("Precio: $ " + this.precio)
     
+    }
+    sumarIva = () => {
+    this.precio = this.precio*1.21
+    console.log("Precio mas IVA: $" + this.precio)
 
-
-    const changuito1 = new Carrito(compraProducto, cantidadProducto)
-    changuitoItems.push(changuito1)
-}
-
-const verCarrito = () => {
-    if(changuitoItems.length == 0) {
-        alert("No hay productos agregados al carrito")
-    } else {
-        console.log(changuitoItems)
     }
 }
 
+const te1 = new Producto("Té negro La Virginia", "Argentina", "25 saquitos", 1500)
+const te2 = new Producto("Té verde Taragüi", "Argentina", "20 saquitos", 1850)
+const te3 = new Producto("Té Earl Grey Twinings", "Reino Unido", "25 saquitos", 6500)
+const te4 = new Producto("Té rojo Pu-Erh Inti Zen", "China", "15 saquitos", 4200)
+const te5 = new Producto("Té en hebras Chai Saint Gottard", "India", "50 gramos", 3800)
 
+const verCatalogo = () => {
+te1.verProductos()
+te1.sumarIva()
+te2.verProductos()
+te2.sumarIva()
+te3.verProductos()
+te3.sumarIva()
+te4.verProductos()
+te4.sumarIva()
+te5.verProductos()
+te5.sumarIva()
+}
 
-const pagarCarrito = () => {
+const pagarCompra = () => {
 let pagar = true
 while(pagar) {
     let importeValido = false
@@ -145,27 +132,21 @@ while(pagar) {
         alert("Gracias por su compra!")
     }
 }
+}
 
+let menuPrincipal = parseInt(prompt("Bienvenido! Ingrese 1 para ver catalogo, 2 para pagar, 3 para salir"))
 
-let menuPrincipal = parseInt(prompt("Bienvenido! Ingrese 1 para comprar, 2 para ver carrito, 3 para pagar o 4 para salir"))
-
-while(menuPrincipal !== 4) {
+while(menuPrincipal !== 3) {
     switch(menuPrincipal) {
         case 1:
-            comprarCarrito()
+            verCatalogo()
             break
         case 2:
-            verCarrito()
+            pagarCompra()
             break
-        case 3:
-            pagarCarrito()
-            break
+        
         default:
             alert("Opcion incorrecta")
     }
-    menuPrincipal = parseInt(prompt("Bienvenido! Ingrese 1 para comprar, 2 para ver carrito, 3 para pagar o 4 para salir"))
-}
-
-
-
+    menuPrincipal = menuPrincipal = parseInt(prompt("Ingrese 1 para ver catalogo, 2 para pagar, 3 para salir"))
 }
