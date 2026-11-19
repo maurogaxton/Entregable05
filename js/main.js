@@ -1,3 +1,5 @@
+
+//Depende de la cantidad de cuotas será el factor de recargo
 function recargarCuotas(cantidadCuotas){
     let recargo
     if (cantidadCuotas >= 1 && cantidadCuotas <= 3) {
@@ -10,16 +12,19 @@ function recargarCuotas(cantidadCuotas){
     return recargo
 }
 
+//Calculo del importe de cada cuota
 function calcularValorCuota(importe, cuotasRecargo, cuotas){
     let importeDeCuota = ((importe * cuotasRecargo) / cuotas)
     return importeDeCuota.toFixed(2)
 }
 
+//Convierte el factor de recargo en porcentaje
 function calcularPorcentaje(cuotasConRecargo){
     let valorPorcentaje = ((cuotasConRecargo - 1) * 100)
     return valorPorcentaje.toFixed(2)
 }
 
+//Hace el calculo final del pago con tarjeta
 function calculoPagoConTarjeta(empresa, importe){
     let cuotasRecargo
     let importeCuota
@@ -44,8 +49,10 @@ function calculoPagoConTarjeta(empresa, importe){
     return mensaje 
 }
 
+//Calcula cuanto es la sumatoria de las cuotas, el costo final para el cliente
 const calcularCostoTotal = (importe, cuotasRecargo) => importe * cuotasRecargo
 
+//Definicion de la Clase Producto, propiedades y metodos
 class Producto{
     static id = 0
     constructor (nombre, origen, presentacion, precio){
@@ -69,12 +76,14 @@ class Producto{
     }
 }
 
+//Creacion de instancias de la clase Productos
 const te1 = new Producto("Té negro La Virginia", "Argentina", "25 saquitos", 1500)
 const te2 = new Producto("Té verde Taragüi", "Argentina", "20 saquitos", 1850)
 const te3 = new Producto("Té Earl Grey Twinings", "Reino Unido", "25 saquitos", 6500)
 const te4 = new Producto("Té rojo Pu-Erh Inti Zen", "China", "15 saquitos", 4200)
 const te5 = new Producto("Té en hebras Chai Saint Gottard", "India", "50 gramos", 3800)
 
+//Para ver Catalogo de productos, se aplican los metodos de Productos
 const verCatalogo = () => {
 te1.verProductos()
 te1.sumarIva()
@@ -88,6 +97,7 @@ te5.verProductos()
 te5.sumarIva()
 }
 
+// Para elegir metodo de pago
 const pagarCompra = () => {
 let pagar = true
 while(pagar) {
@@ -134,6 +144,7 @@ while(pagar) {
 }
 }
 
+//Menu principal
 let menuPrincipal = parseInt(prompt("Bienvenido! Ingrese 1 para ver catalogo, 2 para pagar, 3 para salir"))
 
 while(menuPrincipal !== 3) {
